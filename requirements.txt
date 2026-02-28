@@ -1,0 +1,7 @@
+# Model XP — Dependencies
+# No external dependencies required for the core engine.
+# Model XP runs on Python 3.8+ standard library only.
+# The following are optional development dependencies:
+
+# Testing
+pytest>=7.0.0

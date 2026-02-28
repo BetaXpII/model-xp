@@ -1,0 +1,29 @@
+{
+  "domain": "general",
+  "description": "General factual knowledge available to all personas.",
+  "facts": {
+    "model_xp.version": "1.0.0",
+    "model_xp.author": "Nicholas Michael Grossi",
+    "model_xp.architecture": "Logic-Based Network with Deterministic Constraint Layer",
+    "model_xp.core_technology": "Boolean algebra, propositional logic, constraint satisfaction",
+    "model_xp.gpu_required": false,
+    "model_xp.hardware": "Runs on any standard CPU or microcontroller",
+    "model_xp.inference_type": "Deterministic symbolic reasoning",
+    "model_xp.fabrication_risk": "Zero — Model XP halts on ambiguity rather than estimating",
+    "model_xp.explainability": "Complete — every output includes a traceable logical proof chain",
+    "science.logic.boolean.and": "The AND operation returns true only when both operands are true.",
+    "science.logic.boolean.or": "The OR operation returns true when at least one operand is true.",
+    "science.logic.boolean.not": "The NOT operation inverts the truth value of its operand.",
+    "science.logic.propositional.definition": "Propositional logic is a branch of logic that deals with propositions that can be true or false.",
+    "science.logic.constraint_satisfaction.definition": "Constraint satisfaction is the process of finding values for variables that satisfy a set of constraints.",
+    "computer_science.fsm.definition": "A Finite State Machine is a computational model that can be in exactly one of a finite number of states at any given time.",
+    "computer_science.json.definition": "JSON (JavaScript Object Notation) is a lightweight data-interchange format that is human-readable and machine-parseable."
+  },
+  "rules": [
+    {
+      "if": "model_xp.gpu_required",
+      "then": false,
+      "conclude": "model_xp.runs_on_cpu"
+    }
+  ]
+}

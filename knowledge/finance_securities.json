@@ -1,0 +1,31 @@
+{
+  "domain": "finance.securities",
+  "description": "Core facts and rules for securities and financial markets.",
+  "facts": {
+    "finance.securities.definition": "A security is a tradable financial asset, including stocks, bonds, and derivatives.",
+    "finance.securities.stock.definition": "A stock represents fractional ownership in a corporation.",
+    "finance.securities.bond.definition": "A bond is a fixed-income instrument representing a loan from an investor to a borrower.",
+    "finance.securities.sp500.definition": "The S&P 500 is a stock market index tracking the 500 largest publicly traded companies in the United States.",
+    "finance.securities.sp500.component_count": 500,
+    "finance.securities.sp500.currency": "USD",
+    "finance.securities.market.nyse.location": "New York, United States",
+    "finance.securities.market.nasdaq.location": "New York, United States",
+    "finance.securities.derivative.definition": "A derivative is a financial contract whose value is derived from an underlying asset.",
+    "finance.risk.definition": "Financial risk is the probability of a loss resulting from market exposure.",
+    "finance.risk.types": ["market risk", "credit risk", "liquidity risk", "operational risk"],
+    "finance.securities.regulation.sec": "The Securities and Exchange Commission (SEC) is the primary regulatory body for securities in the United States.",
+    "finance.securities.ipo.definition": "An Initial Public Offering (IPO) is the process by which a private company offers shares to the public for the first time."
+  },
+  "rules": [
+    {
+      "if": "finance.securities.sp500.component_count",
+      "then": 500,
+      "conclude": "finance.securities.sp500.has_500_components"
+    },
+    {
+      "if": "finance.securities.stock.definition",
+      "then": true,
+      "conclude": "finance.securities.stock.is_equity"
+    }
+  ]
+}
