@@ -12,6 +12,7 @@ from .persona_loader import PersonaLoader, Persona
 from .knowledge_base import KnowledgeBase
 from .inference_engine import InferenceEngine
 from .governance import GovernanceLayer
+from .ml_engine import MLEngine, DecisionTreeClassifier, NaiveBayesClassifier, KNNClassifier
 
 __version__ = "1.0.0"
 __author__ = "Nicholas Michael Grossi"
@@ -22,4 +23,8 @@ __all__ = [
     "KnowledgeBase",
     "InferenceEngine",
     "GovernanceLayer",
+    "MLEngine",
+    "DecisionTreeClassifier",
+    "NaiveBayesClassifier",
+    "KNNClassifier",
 ]

@@ -20,6 +20,7 @@ from .persona_loader import PersonaLoader, Persona, PersonaLoadError
 from .knowledge_base import KnowledgeBase
 from .inference_engine import InferenceEngine
 from .governance import GovernanceLayer
+from .ml_engine import MLEngine
 
 
 class State(Enum):
@@ -55,6 +56,7 @@ class FSMController:
         self._kb = KnowledgeBase()
         self._engine = InferenceEngine(self._kb)
         self._governance = GovernanceLayer()
+        self._ml = MLEngine()
 
         self._state: State = State.IDLE
         self._active_persona: Optional[Persona] = None
@@ -256,6 +258,7 @@ class FSMController:
                 "/status                Display current system status.\n"
                 "/audit                 Display the full audit log.\n"
                 "/state                 Display the current FSM state.\n"
+                "/ml                    Display machine learning engine status.\n"
                 "─────────────────────────────\n"
                 "Any other input is processed as a query."
             )
@@ -305,10 +308,38 @@ class FSMController:
                     "answer": f"Current FSM State: {self._state.name}",
                     "halt_reason": None, "proof": [], "audit_log": [], "timestamp": self._now()}
 
+        if command == "/ml":
+            models = self._ml.list_models()
+            log = self._ml.get_training_log()
+            if not models:
+                answer = (
+                    "Machine Learning Engine Status\n"
+                    "─────────────────────────────\n"
+                    "No models have been trained in this session.\n"
+                    "Use the MLEngine API directly to train models.\n"
+                    "Supported algorithms: decision_tree, naive_bayes, knn"
+                )
+            else:
+                import json
+                answer = (
+                    f"Machine Learning Engine Status\n"
+                    f"─────────────────────────────\n"
+                    f"Trained Models: {', '.join(models)}\n"
+                    f"Training Log:\n{json.dumps(log, indent=2)}"
+                )
+            self._transition(State.IDLE)
+            return {"state": "OUTPUT", "persona": self._active_persona.name,
+                    "answer": answer, "halt_reason": None,
+                    "proof": [], "audit_log": [], "timestamp": self._now()}
+
         return self._halt(f"UNKNOWN COMMAND: '{command}'. Type /help for available commands.")
 
     def kb_domains(self) -> list:
         return self._kb.get_loaded_domains()
+
+    def get_ml_engine(self) -> MLEngine:
+        """Return the ML engine instance for direct programmatic access."""
+        return self._ml
 
     def _transition(self, new_state: State) -> None:
         """Record a state transition."""
